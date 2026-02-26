@@ -24,7 +24,7 @@ export default defineConfig({
       '/api/prescriptions': {
         target: 'http://localhost:8082',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        // medicine-service maps to /api/prescriptions, so do not rewrite
       },
     },
   },

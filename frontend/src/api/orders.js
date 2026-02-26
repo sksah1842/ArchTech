@@ -1,6 +1,6 @@
 const API = import.meta.env.VITE_API_BASE ?? '';
 
-export async function placeOrder(token, items) {
+export async function placeOrder(token, items, requiresPrescriptionApproval = false) {
   const res = await fetch(`${API}/api/orders`, {
     method: 'POST',
     headers: {
@@ -9,6 +9,7 @@ export async function placeOrder(token, items) {
     },
     body: JSON.stringify({
       items: items.map((i) => ({ medicineId: i.medicineId, quantity: i.quantity })),
+      requiresPrescriptionApproval: requiresPrescriptionApproval || false,
     }),
   });
   if (!res.ok) {

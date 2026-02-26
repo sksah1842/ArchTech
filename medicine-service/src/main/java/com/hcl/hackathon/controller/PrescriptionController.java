@@ -17,7 +17,7 @@ import com.hcl.hackathon.security.AuthDetails;
 import com.hcl.hackathon.service.PrescriptionService;
 
 @RestController
-@RequestMapping("/prescriptions")
+@RequestMapping("/api/prescriptions")
 @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 public class PrescriptionController {
 

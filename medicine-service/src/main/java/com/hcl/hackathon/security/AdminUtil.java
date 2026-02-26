@@ -11,7 +11,7 @@ public class AdminUtil {
                 (UsernamePasswordAuthenticationToken)
                         SecurityContextHolder.getContext().getAuthentication();
 
-        if (auth == null) {
+        if (auth == null || auth.getDetails() == null || !(auth.getDetails() instanceof AuthDetails)) {
             throw new RuntimeException("Unauthorized");
         }
 

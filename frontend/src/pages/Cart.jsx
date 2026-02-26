@@ -5,6 +5,7 @@ import { selectCartItems, removeFromCart, updateQuantity, clearCart } from '../s
 import { selectToken, selectIsAuthenticated } from '../store/slices/authSlice';
 import { placeOrder as placeOrderApi } from '../api/orders';
 import { uploadPrescription } from '../api/prescriptions';
+import { uploadPrescriptionFile } from '../api/cloudinary';
 import './Cart.css';
 
 function Cart() {
@@ -39,11 +40,12 @@ function Cart() {
     setPlacing(true);
     try {
       if (needsPrescription) {
+        const fileUrl = await uploadPrescriptionFile(prescriptionFile);
         for (const item of itemsRequiringPrescription) {
-          await uploadPrescription(token, item.medicineId);
+          await uploadPrescription(token, item.medicineId, fileUrl);
         }
       }
-      await placeOrderApi(token, items);
+      await placeOrderApi(token, items, needsPrescription);
       setOrderSuccess(true);
       dispatch(clearCart());
     } catch (err) {

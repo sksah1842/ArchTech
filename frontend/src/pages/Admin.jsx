@@ -170,6 +170,7 @@ function Admin() {
                     <th>User ID</th>
                     <th>Medicine ID</th>
                     <th>Status</th>
+                    <th>Prescription file</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -180,6 +181,13 @@ function Admin() {
                       <td>{p.userId}</td>
                       <td>{p.medicineId}</td>
                       <td><span className={`admin-status admin-status-${(p.status || '').toLowerCase()}`}>{p.status}</span></td>
+                      <td>
+                        {p.fileUrl ? (
+                          <a href={p.fileUrl} target="_blank" rel="noopener noreferrer" className="admin-link">View</a>
+                        ) : (
+                          '—'
+                        )}
+                      </td>
                       <td>
                         {p.status === 'PENDING' && (
                           <>

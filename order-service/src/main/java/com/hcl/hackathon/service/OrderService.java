@@ -43,7 +43,8 @@ public class OrderService {
 
         Order order = new Order();
         order.setUserId(userId);
-        order.setStatus(Status.PENDING);
+        boolean needsApproval = Boolean.TRUE.equals(request.getRequiresPrescriptionApproval());
+        order.setStatus(needsApproval ? Status.PENDING : Status.APPROVED);
         order.setCreatedAt(LocalDateTime.now());
 
         var items = request.getItems().stream().map(itemReq -> {

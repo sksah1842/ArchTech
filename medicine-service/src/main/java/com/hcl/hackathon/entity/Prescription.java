@@ -15,5 +15,6 @@ public class Prescription {
     private Long medicineId;
     private String status; // PENDING / APPROVED / REJECTED
 
-    // getters and setters
+    /** Cloudinary (or other) URL of the uploaded prescription PDF/image. */
+    private String fileUrl;
 }

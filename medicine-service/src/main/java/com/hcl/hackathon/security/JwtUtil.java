@@ -1,5 +1,6 @@
 package com.hcl.hackathon.security;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ public class JwtUtil {
     private final Key key;
 
     public JwtUtil(@Value("${jwt.secret}") String secret) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     public Claims validate(String token) {

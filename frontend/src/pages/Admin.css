@@ -134,6 +134,15 @@
   background: #b91c1c;
 }
 
+.admin-link {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.admin-link:hover {
+  text-decoration: underline;
+}
+
 .admin-form {
   display: flex;
   flex-direction: column;
