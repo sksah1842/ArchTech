@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { selectCartItems, removeFromCart, updateQuantity, clearCart } from '../store/slices/cartSlice';
 import { selectToken, selectIsAuthenticated } from '../store/slices/authSlice';
 import { placeOrder as placeOrderApi } from '../api/orders';
@@ -10,6 +10,7 @@ import './Cart.css';
 
 function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const items = useSelector(selectCartItems);
   const token = useSelector(selectToken);
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -25,7 +26,7 @@ function Cart() {
 
   const handlePlaceOrder = async () => {
     if (!isAuthenticated || !token) {
-      setOrderError('Please log in to place an order.');
+      navigate('/login', { state: { from: '/cart' } });
       return;
     }
     if (items.length === 0) {
@@ -149,7 +150,7 @@ function Cart() {
           type="button"
           className="cart-place-btn"
           onClick={handlePlaceOrder}
-          disabled={placing || items.length === 0 || !isAuthenticated || !canPlaceOrder}
+          disabled={placing || items.length === 0 || (isAuthenticated && !canPlaceOrder)}
         >
           {placing ? 'Placing order…' : 'Place order'}
         </button>

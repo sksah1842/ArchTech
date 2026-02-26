@@ -15,6 +15,7 @@ import com.hcl.hackathon.entity.Prescription;
 import com.hcl.hackathon.security.AdminUtil;
 import com.hcl.hackathon.security.AuthDetails;
 import com.hcl.hackathon.service.PrescriptionService;
+import com.hcl.hackathon.dto.PrescriptionUploadRequest;
 
 @RestController
 @RequestMapping("/api/prescriptions")
@@ -29,14 +30,17 @@ public class PrescriptionController {
 
     // User upload (authenticated; userId set from JWT)
     @PostMapping
-    public Prescription upload(@RequestBody Prescription p) {
+    public Prescription upload(@RequestBody PrescriptionUploadRequest request) {
         UsernamePasswordAuthenticationToken auth =
                 (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || auth.getDetails() == null || !(auth.getDetails() instanceof AuthDetails)) {
             throw new RuntimeException("Unauthorized");
         }
         Long userId = ((AuthDetails) auth.getDetails()).getUserId();
+        Prescription p = new Prescription();
         p.setUserId(userId);
+        p.setMedicineId(request.getMedicineId());
+        p.setFileUrl(request.getFileUrl());
         return service.upload(p);
     }
 

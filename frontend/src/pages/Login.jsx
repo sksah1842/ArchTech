@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { login, selectAuthLoading, selectAuthError, clearError } from '../store/slices/authSlice';
 import './Auth.css';
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const loading = useSelector(selectAuthLoading);
   const error = useSelector(selectAuthError);
+  const from = location.state?.from;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +21,11 @@ function Login() {
     const result = await dispatch(login({ email, password }));
     if (login.fulfilled.match(result)) {
       const role = result.payload?.role;
-      navigate(role === 'ADMIN' ? '/admin' : '/');
+      if (role === 'ADMIN') {
+        navigate('/admin');
+      } else {
+        navigate(from || '/', { replace: true });
+      }
     }
   };
 
