@@ -3,6 +3,10 @@ function AdminPrescriptions({ prescriptions, loading, error, onApprove, onReject
     <section className="admin-section">
       <h2 className="admin-section-title">Prescriptions</h2>
       <p className="admin-section-desc">Review uploaded prescriptions and approve or reject.</p>
+      <p className="admin-section-hint">
+        If a PDF won’t open: in Cloudinary go to <strong>Settings → Security</strong> and enable{' '}
+        <strong>Allow delivery of PDF and ZIP files</strong>.
+      </p>
       {loading && <p className="admin-loading">Loading prescriptions…</p>}
       {error && <p className="admin-error">{error}</p>}
       {!loading && !error && (
@@ -34,9 +38,21 @@ function AdminPrescriptions({ prescriptions, loading, error, onApprove, onReject
                     </td>
                     <td>
                       {p.fileUrl ? (
-                        <a href={p.fileUrl} target="_blank" rel="noopener noreferrer" className="admin-link">
-                          View
-                        </a>
+                        <span className="admin-file-links">
+                          <a href={p.fileUrl} target="_blank" rel="noopener noreferrer" className="admin-link">
+                            Open in new tab
+                          </a>
+                          <span className="admin-file-links-sep">·</span>
+                          <a
+                            href={p.fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="admin-link"
+                            download
+                          >
+                            Download
+                          </a>
+                        </span>
                       ) : (
                         '—'
                       )}

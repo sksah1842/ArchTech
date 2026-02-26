@@ -77,6 +77,25 @@
   color: #64748b;
 }
 
+.admin-section-hint {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid #94a3b8;
+}
+
+.admin-section-hint strong {
+  color: #475569;
+}
+
+.admin-file-links-sep {
+  margin: 0 0.35rem;
+  color: #cbd5e1;
+}
+
 .admin-loading,
 .admin-empty {
   color: #64748b;
