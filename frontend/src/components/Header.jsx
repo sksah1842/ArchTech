@@ -12,6 +12,7 @@ function Header() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
   const isAdminPage = location.pathname === '/admin';
+  const isManagerPage = location.pathname === '/manager';
 
   const handleLogout = () => {
     dispatch(logout());
@@ -25,7 +26,7 @@ function Header() {
           MedixCare Pharmacy
         </Link>
         <nav className="site-nav">
-          {!isAdminPage && (
+          {!isAdminPage && !isManagerPage && (
             <>
               <Link to="/" className="site-nav-link">Medicines</Link>
               <Link to="/cart" className="site-nav-link">
@@ -36,6 +37,7 @@ function Header() {
           {isAuthenticated ? (
             <>
               {user?.role === 'ADMIN' && <Link to="/admin" className="site-nav-link">Admin</Link>}
+              {user?.role === 'MANAGER' && <Link to="/manager" className="site-nav-link">Dashboard</Link>}
               {user?.role && <span className="site-nav-role">{user.role}</span>}
               <button type="button" className="site-nav-btn" onClick={handleLogout}>
                 Logout

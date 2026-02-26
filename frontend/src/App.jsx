@@ -5,10 +5,15 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
+import ManagerDashboard from './pages/ManagerDashboard';
 import './App.css';
 
 function AdminRoute() {
   return <Admin />;
+}
+
+function ManagerRoute() {
+  return <ManagerDashboard />;
 }
 
 function App() {
@@ -23,6 +28,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin" element={<AdminRoute />} />
+            <Route path="/manager" element={<ManagerRoute />} />
           </Routes>
         </main>
       </div>

@@ -29,9 +29,8 @@ public class DataInitializer implements CommandLineRunner {
         Role adminRole = roleRepository.findByRoleName("ADMIN").orElseGet(() ->
                 roleRepository.save(Role.builder().roleName("ADMIN").build()));
 
-        if (roleRepository.findByRoleName("MANAGER").isEmpty()) {
-            roleRepository.save(Role.builder().roleName("MANAGER").build());
-        }
+        Role managerRole = roleRepository.findByRoleName("MANAGER").orElseGet(() ->
+                roleRepository.save(Role.builder().roleName("MANAGER").build()));
 
         if (userRepository.findByEmail("admin@gmail.com").isEmpty()) {
             User admin = User.builder()
@@ -43,6 +42,18 @@ public class DataInitializer implements CommandLineRunner {
                     .build();
             userRepository.save(admin);
             System.out.println("Default admin user created: admin@gmail.com");
+        }
+
+        if (userRepository.findByEmail("manager@gmail.com").isEmpty()) {
+            User manager = User.builder()
+                    .name("Manager")
+                    .email("manager@gmail.com")
+                    .password(passwordEncoder.encode("manager123"))
+                    .role(managerRole)
+                    .createdAt(LocalDateTime.now())
+                    .build();
+            userRepository.save(manager);
+            System.out.println("Default manager user created: manager@gmail.com");
         }
 
         System.out.println("Default roles and admin data initialized.");

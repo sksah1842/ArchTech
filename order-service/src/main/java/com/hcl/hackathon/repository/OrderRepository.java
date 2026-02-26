@@ -12,12 +12,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT COUNT(o) FROM Order o")
     Long countTotalOrders();
 
-    @Query("SELECT SUM(o.totalAmount) FROM Order o WHERE o.status='APPROVED'")
+    @Query("SELECT COALESCE(SUM(o.totalAmount), 0) FROM Order o WHERE o.status = com.hcl.hackathon.entity.Status.APPROVED")
     Double totalRevenue();
 
     @Query("SELECT COUNT(o) FROM Order o WHERE o.status=:status")
     Long countByStatus(Status status);
 
-    @Query("SELECT SUM(o.totalAmount) FROM Order o WHERE o.createdAt >= :start")
+    @Query("SELECT COALESCE(SUM(o.totalAmount), 0) FROM Order o WHERE o.createdAt >= :start AND o.status = com.hcl.hackathon.entity.Status.APPROVED")
     Double todayRevenue(LocalDateTime start);
 }

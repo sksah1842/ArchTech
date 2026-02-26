@@ -23,6 +23,8 @@ function Login() {
       const role = result.payload?.role;
       if (role === 'ADMIN') {
         navigate('/admin');
+      } else if (role === 'MANAGER') {
+        navigate('/manager');
       } else {
         navigate(from || '/', { replace: true });
       }
