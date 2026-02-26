@@ -7,12 +7,12 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const { medicineId, name, price, quantity = 1 } = action.payload;
+      const { medicineId, name, price, quantity = 1, requiresPrescription } = action.payload;
       const existing = state.items.find((i) => i.medicineId === medicineId);
       if (existing) {
         existing.quantity += quantity;
       } else {
-        state.items.push({ medicineId, name, price, quantity });
+        state.items.push({ medicineId, name, price, quantity, requiresPrescription: Boolean(requiresPrescription) });
       }
     },
     removeFromCart: (state, action) => {

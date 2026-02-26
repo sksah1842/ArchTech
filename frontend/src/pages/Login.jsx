@@ -18,7 +18,8 @@ function Login() {
     dispatch(clearError());
     const result = await dispatch(login({ email, password }));
     if (login.fulfilled.match(result)) {
-      navigate('/');
+      const role = result.payload?.role;
+      navigate(role === 'ADMIN' ? '/admin' : '/');
     }
   };
 

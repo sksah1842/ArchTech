@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCartCount } from '../store/slices/cartSlice';
 import { selectIsAuthenticated, selectUser, logout } from '../store/slices/authSlice';
@@ -7,9 +7,11 @@ import './Header.css';
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const cartCount = useSelector(selectCartCount);
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
+  const isAdminPage = location.pathname === '/admin';
 
   const handleLogout = () => {
     dispatch(logout());
@@ -23,12 +25,17 @@ function Header() {
           MedixCare Pharmacy
         </Link>
         <nav className="site-nav">
-          <Link to="/" className="site-nav-link">Medicines</Link>
-          <Link to="/cart" className="site-nav-link">
-            Cart{cartCount > 0 ? ` (${cartCount})` : ''}
-          </Link>
+          {!isAdminPage && (
+            <>
+              <Link to="/" className="site-nav-link">Medicines</Link>
+              <Link to="/cart" className="site-nav-link">
+                Cart{cartCount > 0 ? ` (${cartCount})` : ''}
+              </Link>
+            </>
+          )}
           {isAuthenticated ? (
             <>
+              {user?.role === 'ADMIN' && <Link to="/admin" className="site-nav-link">Admin</Link>}
               {user?.role && <span className="site-nav-role">{user.role}</span>}
               <button type="button" className="site-nav-btn" onClick={handleLogout}>
                 Logout

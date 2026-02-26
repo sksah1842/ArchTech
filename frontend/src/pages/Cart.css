@@ -138,6 +138,68 @@
   border-radius: 6px;
 }
 
+.cart-prescription-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+}
+
+.cart-prescription-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #92400e;
+}
+
+.cart-prescription-desc {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: #b45309;
+}
+
+.cart-prescription-list {
+  margin: 0 0 0.75rem;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  color: #92400e;
+}
+
+.cart-prescription-upload {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cart-prescription-upload-label {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: #92400e;
+  background: #fff;
+  border: 1px solid #f59e0b;
+  border-radius: 6px;
+}
+
+.cart-prescription-upload-label:hover {
+  background: #fffbeb;
+}
+
+.cart-prescription-input {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.cart-item-rx {
+  font-size: 0.75rem;
+  color: #b45309;
+  font-weight: 500;
+}
+
 .cart-login-hint {
   margin: 0 0 0.5rem;
   font-size: 0.9rem;

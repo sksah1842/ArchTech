@@ -19,7 +19,8 @@ function Register() {
     dispatch(clearError());
     const result = await dispatch(registerUser({ name, email, password }));
     if (registerUser.fulfilled.match(result)) {
-      navigate('/');
+      const role = result.payload?.role;
+      navigate(role === 'ADMIN' ? '/admin' : '/');
     }
   };
 

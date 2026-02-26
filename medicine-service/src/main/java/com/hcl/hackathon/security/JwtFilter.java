@@ -38,6 +38,8 @@ public class JwtFilter implements Filter {
 
             String email = claims.getSubject();
             String role = claims.get("role", String.class);
+            Object uid = claims.get("userId");
+            Long userId = (uid instanceof Number) ? ((Number) uid).longValue() : null;
 
             UsernamePasswordAuthenticationToken auth =
                     new UsernamePasswordAuthenticationToken(
@@ -46,7 +48,7 @@ public class JwtFilter implements Filter {
                             Collections.emptyList()
                     );
 
-            auth.setDetails(role);
+            auth.setDetails(new AuthDetails(role, userId));
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
 

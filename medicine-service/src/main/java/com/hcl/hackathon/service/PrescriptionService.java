@@ -1,6 +1,8 @@
 package com.hcl.hackathon.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ public class PrescriptionService {
 
     public PrescriptionService(PrescriptionRepository repo) {
         this.repo = repo;
+    }
+
+    public List<Prescription> getAll() {
+        return repo.findAll();
     }
 
     public Prescription upload(Prescription p) {

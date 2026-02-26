@@ -138,6 +138,7 @@ function Home() {
                       name: m.name,
                       price: typeof m.price === 'number' ? m.price : Number(m.price),
                       quantity: 1,
+                      requiresPrescription: Boolean(m.requiresPrescription),
                     }))}
                   >
                     Add to cart

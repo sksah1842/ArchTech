@@ -15,7 +15,7 @@ public class AdminUtil {
             throw new RuntimeException("Unauthorized");
         }
 
-        String role = (String) auth.getDetails();
+        String role = ((AuthDetails) auth.getDetails()).getRole();
 
         if (!"ADMIN".equals(role)) {
             throw new RuntimeException("Only ADMIN allowed");

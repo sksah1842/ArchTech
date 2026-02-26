@@ -4,7 +4,12 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Admin from './pages/Admin';
 import './App.css';
+
+function AdminRoute() {
+  return <Admin />;
+}
 
 function App() {
   return (
@@ -17,6 +22,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<AdminRoute />} />
           </Routes>
         </main>
       </div>
